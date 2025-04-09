@@ -1,24 +1,31 @@
+// App.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import Footer from "./components/Footer";
 import ProductList from "./components/ProductList";
 import ProductDetails from "./components/ProductDetails";
-import Footer from "./components/Footer";
 import Navigation from "./components/Navigation";
+
+const HomePage = () => (
+  <>
+    <Hero />
+    <About />
+    <ProductList />
+  </>
+);
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter basename="/Module3-REACT-Application-Development/">
       <Navigation />
-      <Hero />
-      <About />
-      <ProductList />
-      <Footer />
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/product/:id" element={<ProductDetails />} />
       </Routes>
-    </Router>
+      <Footer />
+    </BrowserRouter>
   );
 }
 

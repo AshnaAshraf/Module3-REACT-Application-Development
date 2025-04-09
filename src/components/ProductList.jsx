@@ -1,40 +1,44 @@
+// components/ProductList.jsx
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Button, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Row, Col, Card, Button, Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setProducts(data);
         setLoading(false);
-      });
+      })
+      .catch((err) => console.error("Error fetching products:", err));
   }, []);
 
-  if (loading) {
-    return <div className="text-center mt-5"><Spinner animation="border" /></div>;
-  }
+  if (loading) return <div className="text-center mt-5"><Spinner animation="border" /></div>;
 
   return (
     <section id="products" className="py-5 bg-light">
-      <Container>
+      <div className="container">
         <h2 className="text-center mb-4">Our Products</h2>
         <Row>
-          {products.map(product => (
+          {products.map((product) => (
             <Col md={4} className="mb-4" key={product.id}>
-              <Card className="h-100 product-card">
-                <Card.Img variant="top" src={product.image} style={{ height: "200px", objectFit: "contain" }} />
+              <Card className="product-card p-3 h-100">
+                <Card.Img
+                  variant="top"
+                  src={product.image}
+                  style={{ height: "200px", objectFit: "contain" }}
+                />
                 <Card.Body className="d-flex flex-column">
                   <Card.Title>{product.title}</Card.Title>
-                  <Card.Text className="text-success">${product.price.toFixed(2)}</Card.Text>
+                  <Card.Text className="text-success fw-bold">${product.price.toFixed(2)}</Card.Text>
                   <Button
-                    as={Link}
-                    to={`/product/${product.id}`}
                     variant="primary"
+                    onClick={() => navigate(`/product/${product.id}`)}
                     className="mt-auto"
                   >
                     View Product
@@ -44,7 +48,7 @@ const ProductList = () => {
             </Col>
           ))}
         </Row>
-      </Container>
+      </div>
     </section>
   );
 };
