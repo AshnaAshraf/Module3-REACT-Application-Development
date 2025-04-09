@@ -11,18 +11,11 @@ function App() {
   return (
     <Router>
       <Navigation />
+      <Hero />
+      <About />
+      <ProductList />
+      <Footer />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Hero />
-              <About />
-              <ProductList />
-              <Footer />
-            </>
-          }
-        />
         <Route path="/product/:id" element={<ProductDetails />} />
       </Routes>
     </Router>
