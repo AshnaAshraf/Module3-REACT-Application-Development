@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Navigation = () => {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
       <Container>
         <Navbar.Brand as={Link} to="/">CartNest</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarNav" />

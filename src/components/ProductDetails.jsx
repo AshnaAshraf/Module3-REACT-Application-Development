@@ -51,6 +51,11 @@ const ProductDetails = () => {
             <Badge bg="info" className="mb-3 text-uppercase">{product.category}</Badge>
             <p className="text-muted mb-3">{product.description}</p>
             <h4 className="text-success mb-4">${product.price.toFixed(2)}</h4>
+            {product.rating && (
+            <div className="mb-3">
+                <strong>Rating:</strong> {product.rating.rate} ⭐ ({product.rating.count} reviews)
+            </div>
+            )}
             <div className="d-flex gap-2">
               <Button variant="secondary" onClick={handleBack}>Back to Shop</Button>
               <Button variant="primary" onClick={handleAddToCart} disabled={addedToCart}>
